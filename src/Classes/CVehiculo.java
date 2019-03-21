@@ -1,5 +1,6 @@
 package Classes;
 
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
@@ -16,6 +17,12 @@ public class CVehiculo {
     protected final String matOld = "[A-Z]{2}[0-9]{4}[A-Z]{2}";
     protected final String matNew = "[0-9]{4}[A-Z]{3}";
 
+    protected Pattern pOld = Pattern.compile(matOld);
+    protected Pattern pNew = Pattern.compile(matNew);
+
+    protected Matcher mOld = pOld.matcher(matricula);
+    protected Matcher mNew = pNew.matcher(matricula);
+
     //Constructores
     public CVehiculo() {
         this.tipo = this.getClass().getName();
@@ -23,7 +30,7 @@ public class CVehiculo {
 
     public CVehiculo(String matricula) {
         try {
-            if (Pattern.matches(matOld, matricula) || Pattern.matches(matNew, matricula)) {
+            if (mNew.matches() || mOld.matches()) {
                 this.matricula = matricula;
                 this.tipo = this.getClass().getName();
 
