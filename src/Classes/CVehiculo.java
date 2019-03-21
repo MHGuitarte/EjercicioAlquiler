@@ -20,15 +20,15 @@ public class CVehiculo {
     protected Pattern pOld = Pattern.compile(matOld);
     protected Pattern pNew = Pattern.compile(matNew);
 
-    protected Matcher mOld = pOld.matcher(matricula);
-    protected Matcher mNew = pNew.matcher(matricula);
-
     //Constructores
     public CVehiculo() {
         this.tipo = this.getClass().getName();
     }
 
     public CVehiculo(String matricula) {
+        Matcher mOld = pOld.matcher(matricula);
+        Matcher mNew = pNew.matcher(matricula);
+
         try {
             if (mNew.matches() || mOld.matches()) {
                 this.matricula = matricula;
@@ -43,13 +43,23 @@ public class CVehiculo {
 
     }
 
-    //Getter & Setter
+//Getter & Setter
     public String getMatricula() {
         return matricula;
     }
 
     public void setMatricula(String matricula) {
-        this.matricula = matricula;
+        Matcher mOld = pOld.matcher(matricula);
+        Matcher mNew = pNew.matcher(matricula);
+        try {
+            if (mOld.matches() || mNew.matches()) {
+                this.matricula = matricula;
+            } else {
+                throw new Exception("El formato de matrícula no es correcto.");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public int getKms() {
