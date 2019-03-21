@@ -20,11 +20,11 @@ public class Main {
     public static void main(String[] args) throws IOException {
 
         ArrayList<CVehiculo> listaVehiculos = new ArrayList<CVehiculo>();
-        
+
         listaVehiculos.add(new CCoche("AA1122CC", false));
-        listaVehiculos.add(new CMoto ("BB3344QQ", false));
+        listaVehiculos.add(new CMoto("BB3344QQ", false));
         listaVehiculos.add(new CFurgoneta("1122CAC", 1200));
-        
+
         String orden = "";
 
         while (!orden.equals("fin")) {
@@ -89,6 +89,10 @@ public class Main {
                 CCoche c = new CCoche();
                 System.out.println("Indique la matrícula del vehículo");
                 c.setMatricula(leerString());
+                while (c.getMatricula() == null) {
+                    System.out.println("Introduzca de nuevo la matrícula");
+                    c.setMatricula(leerString());
+                }
                 System.out.println("Indique si el coche incluye extras");
                 if (leerString().equals(true)) {
                     c.setExtras(true);
